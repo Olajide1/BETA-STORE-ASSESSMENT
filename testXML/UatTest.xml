@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="IFIFWebPSuite" parallel="tests" thread-count="1">
+    <parameter name="groupReport" value="/testReport.html" />
+    <parameter name="myBrowser" value="chrome" />
+    <parameter name="environment" value="chrome" />
+    <parameter name="server" value="local" />
+    <parameter name="config" value="parallel.conf.json" />
+    <parameter name="downloadPath" value="/home/seluser/Downloads/" />
+    <parameter name="user" value="valid_Admin_Login" />
+    <parameter name="testEnv" value="uatData" />
+
+
+    <test name="DealerDashboard" preserve-order="true">
+        <parameter name="myBrowser" value="chrome" />
+        <parameter name="user" value="valid_Dealer_Login" />
+        <classes>
+            <class name="Modules.Login">
+                <methods>
+                    <include name="validLogin" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <!--<test name="DealerUserIssueLog" preserve-order="true">
+        <parameter name="myBrowser" value="chrome" />
+        <parameter name="user" value="valid_Dealer_Login" />
+        <classes>
+            <class name="DealerTestCases.UserIssueLog">
+                <methods>
+                    <include name="dealerLogin"/>
+                    <include name="navigateToUserIssueLogTest"/>
+                    <include name="viewDetailsTest"/>
+                    <include name="searchByIssueIDTest"/>
+                    <include name="searchByUsernameTest"/>
+                    <include name="searchByIssueStatusTest"/>
+                    <include name="searchByIssueSummary"/>
+                    <include name="logUserIssueTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>-->
+
+</suite>  <!-- Suite -->
