@@ -28,6 +28,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -47,21 +48,20 @@ public class TestBase {
     private static OptionsManager optionsManager = new OptionsManager();
     public static ThreadLocal<WebDriver> driver = new ThreadLocal<WebDriver>();
     private Local l;
-    public String local="local";
-    public String remoteJenkins="remote-jenkins";
+    public String local = "local";
+    public String remoteJenkins = "remote-jenkins";
 
     public static String toAddress;
     public static final int waitTime = 90;
 
-    @Parameters ("testEnv")
+    @Parameters("testEnv")
     public static String myUrl(String testEnv) {
 
         String myUrl = null;
-        if(testEnv.equalsIgnoreCase("stagingData")) {
-            myUrl = System.getProperty("instance-url", "https://web.facebook.com/");
-        } else
-        {
-            myUrl = System.getProperty("instance-url", "https://web.facebook.com/");
+        if (testEnv.equalsIgnoreCase("stagingData")) {
+            myUrl = System.getProperty("instance-url", "https://test.storefront.simplemarket.app/auth/signin");
+        } else {
+            myUrl = System.getProperty("instance-url", "https://test.storefront.simplemarket.app/auth/signin");
         }
 
         return myUrl;
@@ -70,8 +70,8 @@ public class TestBase {
     public static String gridUrl = System.getProperty("grid-url", "http://10.152.89.194:4445/wd/hub");
 
     @BeforeSuite
-    @Parameters({"groupReport","testEnv"})
-    public void setUp( String groupReport, String testEnv) throws Exception {
+    @Parameters({"groupReport", "testEnv"})
+    public void setUp(String groupReport, String testEnv) throws Exception {
 
         htmlReporter = new ExtentHtmlReporter(new File(System.getProperty("user.dir") + groupReport));
         // htmlReporter.loadXMLConfig(new File(System.getProperty("user.dir") + "/resources/extent-config.xml"));
@@ -79,17 +79,18 @@ public class TestBase {
         reports.setSystemInfo("TEST ENVIRONMENT", myUrl(testEnv));
         reports.attachReporter(htmlReporter);
     }
-    @SuppressWarnings({ "unchecked", "rawtypes"})
-    @Parameters({ "testEnv", "myBrowser", "config", "environment", "server"})
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @Parameters({"testEnv", "myBrowser", "config", "environment", "server"})
     @BeforeClass
-    public void beforeClass(ITestContext iTestContext, String testEnv, String myBrowser, String config_file, String environment, String server) throws Exception{
+    public void beforeClass(ITestContext iTestContext, String testEnv, String myBrowser, String config_file, String environment, String server) throws Exception {
 
         ExtentTest parent = reports.createTest(getClass().getName());
         parentTest.set(parent);
 
 
 
-        if(server.equals(remoteJenkins)) {
+        /*if(server.equals(remoteJenkins)) {
 
             // Remote Server Directory
             String browser = "chrome";
@@ -104,26 +105,26 @@ public class TestBase {
 
             }
 
-        }else if(server.equals(local)) {
-            // Local Directory
-            if (myBrowser.equalsIgnoreCase("chrome")) {
-                WebDriverManager.chromedriver().setup();
-                driver.set(new ChromeDriver(optionsManager.getChromeOptions()));
-                getDriver().manage().window().maximize();
-                getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-                getDriver().get(myUrl(testEnv));
+        }else if(server.equals(local)) {*/
+        // Local Directory
+        if (myBrowser.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver.set(new ChromeDriver(optionsManager.getChromeOptions()));
+            getDriver().manage().window().maximize();
+            getDriver().manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            getDriver().get(myUrl(testEnv));
 
 
-            }
         }
     }
+
 
     @AfterClass
     public void afterClass() {
         getDriver().quit();
     }
 
-    public static  WebDriver getDriver(){
+    public static WebDriver getDriver() {
         return driver.get();
     }
 
@@ -139,10 +140,6 @@ public class TestBase {
         getDriver().findElement(By.linkText("ADMIN")).click();
         Thread.sleep(1000);
     }*/
-
-
-
-
 
 
     @BeforeMethod(description = "fetch test cases name")
@@ -167,11 +164,10 @@ public class TestBase {
             testInfo.get().addScreenCaptureFromBase64String(screenshotPath);
             testInfo.get().fail(result.getThrowable());
             getDriver().navigate().refresh();
-        }
-        else if (result.getStatus() == ITestResult.SKIP)
+        } else if (result.getStatus() == ITestResult.SKIP)
             testInfo.get().skip(result.getThrowable());
         else
-            testInfo.get().pass(result.getName() +" Test passed");
+            testInfo.get().pass(result.getName() + " Test passed");
 
         reports.flush();
     }
@@ -184,4 +180,23 @@ public class TestBase {
 //        SendMail.ComposeGmail("SIMROP Report <seamfix.test.report@gmail.com>", toAddress, groupReport);
 //
 //    }
+
+
+    @Test
+    public static String Login() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
+        TestUtils.testTitle("Valid Login");
+        Thread.sleep(1000);
+
+        String Login = null;
+
+        //Enter Username
+        getDriver().findElement(By.xpath("//input[@name='UserName']")).sendKeys("C-7062554521");
+        //Enter password
+        getDriver().findElement(By.xpath("//input[@name='Password']")).sendKeys("12345678");
+        //Proceed to Login
+        getDriver().findElement(By.xpath("//button[@type='submit']")).click();
+
+        return Login;
+    }
 }

@@ -11,34 +11,29 @@
     <parameter name="testEnv" value="uatData" />
 
 
-    <test name="DealerDashboard" preserve-order="true">
+    <test name="ErrorLoginTest" preserve-order="true">
         <parameter name="myBrowser" value="chrome" />
-        <parameter name="user" value="valid_Dealer_Login" />
+        <parameter name="user" value="valid_Login" />
         <classes>
-            <class name="Modules.Login">
+            <class name="Modules.QaTest">
                 <methods>
-                    <include name="validLogin" />
+                   <include name="LoginError" />
                 </methods>
             </class>
         </classes>
     </test>
-    <!--<test name="DealerUserIssueLog" preserve-order="true">
+    <test name="AddtoCart" preserve-order="true">
         <parameter name="myBrowser" value="chrome" />
-        <parameter name="user" value="valid_Dealer_Login" />
+        <parameter name="user" value="valid_Login" />
         <classes>
-            <class name="DealerTestCases.UserIssueLog">
+            <class name="Modules.QaTest">
                 <methods>
-                    <include name="dealerLogin"/>
-                    <include name="navigateToUserIssueLogTest"/>
-                    <include name="viewDetailsTest"/>
-                    <include name="searchByIssueIDTest"/>
-                    <include name="searchByUsernameTest"/>
-                    <include name="searchByIssueStatusTest"/>
-                    <include name="searchByIssueSummary"/>
-                    <include name="logUserIssueTest"/>
+                    <include name="AddToCart"/>
                 </methods>
             </class>
         </classes>
-    </test>-->
+    </test>
+
+
 
 </suite>  <!-- Suite -->

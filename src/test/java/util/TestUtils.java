@@ -427,58 +427,6 @@ public class TestUtils extends TestBase {
         testInfo.get().info(w);
     }
 
-    /*public static void termsAndConditionsCac() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-
-        try {
-            if (getDriver().findElement(By.xpath("//h1")).isDisplayed()) {
-                Assert.assertEquals(getDriver().getTitle(), "SIMROP | T&Cs");
-                TestUtils.assertSearchText("XPATH", "//h1", "TERMS AND CONDITIONS");
-                TestUtils.testTitle("Accept Terms and Conditions");
-                TestUtils.scrollUntilElementIsVisible("ID", "agree-btn");
-                Thread.sleep(500);
-                getDriver().findElement(By.id("conditionAccepted")).click();
-                getDriver().findElement(By.id("agree-btn")).click();
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[contains(text(),'ADMIN')])[2]")));
-                TestUtils.assertSearchText("XPATH", "(//a[contains(text(),'ADMIN')])[2]", "ADMIN");
-                Thread.sleep(500);
-            }
-        } catch (Exception e) {
-            testInfo.get().info("<b> User has accepted Terms and Conditions </b>");
-            Assert.assertEquals(getDriver().getTitle(), "SIMROP | Dashboard");
-            TestUtils.assertSearchText("XPATH", "(//a[contains(text(),'ADMIN')])[2]", "ADMIN");
-        }
-    }
-
-    public static void termsAndConditionsDealer() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), waitTime);
-
-        try {
-            if (getDriver().findElement(By.xpath("//h1")).isDisplayed()) {
-                Assert.assertEquals(getDriver().getTitle(), "SIMROP | T&Cs");
-                TestUtils.assertSearchText("XPATH", "//h1", "TERMS AND CONDITIONS");
-                TestUtils.testTitle("Accept Terms and Conditions");
-                TestUtils.scrollUntilElementIsVisible("ID", "agree-btn");
-                Thread.sleep(500);
-                getDriver().findElement(By.id("conditionAccepted")).click();
-                getDriver().findElement(By.id("agree-btn")).click();
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//nav/div/div/a")));
-                Assert.assertEquals(getDriver().getTitle(), "SIMROP | Dashboard");
-                TestUtils.assertSearchText("XPATH", "//nav/div/div/a", "DEALER");
-                Thread.sleep(500);
-            }
-        } catch (Exception e) {
-            testInfo.get().info("<b> User has accepted Terms and Conditions </b>");
-            Assert.assertEquals(getDriver().getTitle(), "SIMROP | Dashboard");
-            TestUtils.assertSearchText("XPATH", "//nav/div/div/a", "DEALER");
-        }
-    }*/
-
-    /*
-     * param by - locator of the element where you enter the path of the file
-     * param fileName ï¿½ name of the file to be uploaded
-     */
-
 
 
 
